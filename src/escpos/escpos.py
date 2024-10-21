@@ -236,10 +236,11 @@ class Escpos(object, metaclass=ABCMeta):
 
         try:
             if self.profile.profile_data["media"]["width"]["pixels"] == "Unknown":
-                print(
-                    "The media.width.pixel field of the printer profile is not set. "
-                    + "The center flag will have no effect."
-                )
+                pass
+                # print(
+                #    "The media.width.pixel field of the printer profile is not set. "
+                #    + "The center flag will have no effect."
+                # )
 
             max_width = int(self.profile.profile_data["media"]["width"]["pixels"])
 
@@ -514,7 +515,7 @@ class Escpos(object, metaclass=ABCMeta):
             except (KeyError, TypeError, ZeroDivisionError):
                 # Value on error.
                 dpi = 180
-                print(f"No printer's DPI info was found: Defaulting to {dpi}.")
+                # print(f"No printer's DPI info was found: Defaulting to {dpi}.")
             self.profile.profile_data["media"]["dpi"] = dpi
         return dpi
 
@@ -615,7 +616,7 @@ class Escpos(object, metaclass=ABCMeta):
             if force_software in capable["sw"] and isinstance(force_software, str):
                 # Force to a specific mode
                 impl = force_software
-            print(f"Using {impl} software barcode renderer")
+            # print(f"Using {impl} software barcode renderer")
             # Set barcode type
             bc = capable_bc["sw"] or bc
             # Get mm per point of the printer
@@ -632,7 +633,7 @@ class Escpos(object, metaclass=ABCMeta):
             )
             return
 
-        print("Using hardware barcode renderer")
+        # print("Using hardware barcode renderer")
         bc = capable_bc["hw"] or bc
         self._hw_barcode(
             code, bc, height, width, pos, font, align_ct, function_type, check
